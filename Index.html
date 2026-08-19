@@ -1,0 +1,1373 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>D4w1nchi — Digital Experience</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            background: #080809;
+            color: #eeeeee;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::selection {
+            background: #eeeeee;
+            color: #111111;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .container {
+            width: min(1050px, 90%);
+            margin: auto;
+        }
+
+        section {
+            padding: 90px 0;
+        }
+
+        header {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+
+            width: min(780px, 94%);
+        }
+
+        .dynamic-island {
+            width: 100%;
+            min-height: 56px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 7px 9px;
+
+            background: rgba(18, 18, 20, .86);
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            border-radius: 32px;
+
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+
+            box-shadow:
+                0 18px 55px rgba(0,0,0,.48),
+                inset 0 1px 0 rgba(255,255,255,.05);
+
+            transition: .3s;
+        }
+
+        .dynamic-island:hover {
+            border-color: rgba(255,255,255,.13);
+        }
+
+        .brand {
+            min-width: 90px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            line-height: 1;
+        }
+
+        .brand-title {
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: 1.8px;
+
+            color: #f1f1f1;
+        }
+
+        .brand-name {
+            margin-top: 4px;
+
+            font-size: 7px;
+
+            color: #626264;
+
+            direction: ltr;
+        }
+
+        .island-dot {
+            width: 7px;
+            height: 7px;
+
+            margin: 0 12px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: #555558;
+
+            box-shadow:
+                0 0 12px rgba(255,255,255,.12);
+        }
+
+        .nav-links {
+            flex: 1;
+
+            display: flex;
+            align-items: center;
+
+            gap: 2px;
+        }
+
+        .nav-links a {
+            padding: 8px 13px;
+
+            border-radius: 18px;
+
+            color: #737376;
+
+            font-size: 9px;
+
+            white-space: nowrap;
+
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: #f5f5f5;
+            background: #1b1b1d;
+        }
+
+        .nav-links a.active {
+            color: #eeeeee;
+        }
+
+        .header-btn {
+            padding: 8px 15px;
+
+            border-radius: 18px;
+
+            background: #eeeeee;
+            color: #111111;
+
+            font-size: 8px;
+
+            white-space: nowrap;
+
+            transition: .3s;
+        }
+
+        .header-btn:hover {
+            background: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 125px 20px 80px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            top: -100px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,.055),
+                    transparent 67%
+                );
+
+            filter: blur(15px);
+
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 1px;
+            height: 180px;
+
+            bottom: 0;
+            left: 50%;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    #29292b,
+                    transparent
+                );
+
+            opacity: .5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 760px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding: 5px 12px;
+
+            margin-bottom: 20px;
+
+            border: 1px solid #252527;
+
+            border-radius: 50px;
+
+            color: #666668;
+
+            background: rgba(255,255,255,.02);
+
+            font-size: 9px;
+
+            letter-spacing: .3px;
+        }
+
+        .badge-dot {
+            width: 4px;
+            height: 4px;
+
+            border-radius: 50%;
+
+            background: #999999;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 70px);
+
+            font-weight: 800;
+
+            line-height: 1.05;
+
+            letter-spacing: -3px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .muted {
+            color: #59595c;
+        }
+
+        .hero-description {
+            max-width: 570px;
+
+            margin: auto;
+
+            color: #68686b;
+
+            font-size: 12px;
+
+            line-height: 2;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 9px;
+
+            margin-top: 28px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 110px;
+
+            padding: 9px 18px;
+
+            border-radius: 10px;
+
+            font-size: 9px;
+
+            transition: .3s;
+        }
+
+        .btn-primary {
+            background: #ededed;
+            color: #111111;
+        }
+
+        .btn-primary:hover {
+            background: #ffffff;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(255,255,255,.05);
+        }
+
+        .btn-secondary {
+            border: 1px solid #29292b;
+
+            color: #737376;
+        }
+
+        .btn-secondary:hover {
+            color: #ffffff;
+
+            border-color: #454547;
+
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .section-label {
+            color: #4f4f52;
+
+            font-size: 8px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+        .section-header h2 {
+            margin-top: 8px;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            letter-spacing: -.8px;
+        }
+
+        .section-header p {
+            max-width: 450px;
+
+            margin: 10px auto 0;
+
+            color: #59595c;
+
+            font-size: 10px;
+        }
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 13px;
+        }
+
+        .feature-card {
+            position: relative;
+
+            padding: 24px 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #151517,
+                    #0d0d0f
+                );
+
+            border: 1px solid #202022;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            transition:
+                transform .3s,
+                border-color .3s;
+        }
+
+        .feature-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            top: -50px;
+            left: -50px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            opacity: .025;
+
+            filter: blur(20px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+
+            border-color: #373739;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 11px;
+
+            background: #19191b;
+
+            border: 1px solid #29292b;
+
+            color: #a0a0a3;
+
+            font-size: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 14px;
+
+            margin-bottom: 7px;
+        }
+
+        .feature-card p {
+            color: #5f5f62;
+
+            font-size: 10px;
+
+            line-height: 1.9;
+        }
+
+        .about {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 55px;
+
+            align-items: center;
+        }
+
+        .about-visual {
+            height: 330px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 21px;
+
+            border: 1px solid #222224;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1b1b1d,
+                    #0c0c0e
+                );
+        }
+
+        .about-visual::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+
+            border: 1px solid #333336;
+
+            box-shadow:
+                0 0 0 35px rgba(255,255,255,.012),
+                0 0 0 70px rgba(255,255,255,.008);
+        }
+
+        .about-visual::after {
+            content: "D4";
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            color: #303033;
+
+            font-size: 45px;
+
+            font-weight: 900;
+
+            letter-spacing: -5px;
+        }
+
+        .about-content .section-label {
+            display: block;
+
+            margin-bottom: 8px;
+        }
+
+        .about-content h2 {
+            font-size: 32px;
+
+            line-height: 1.25;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 16px;
+        }
+
+        .about-content h2 span {
+            color: #555558;
+        }
+
+        .about-content p {
+            color: #636366;
+
+            font-size: 11px;
+
+            line-height: 2;
+        }
+
+        .about-content .btn {
+            margin-top: 20px;
+        }
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .stat {
+            padding: 18px;
+
+            text-align: center;
+
+            background: #101012;
+
+            border: 1px solid #1e1e20;
+
+            border-radius: 14px;
+        }
+
+        .stat strong {
+            display: block;
+
+            font-size: 19px;
+
+            color: #dddddf;
+        }
+
+        .stat span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #505053;
+
+            font-size: 8px;
+        }
+
+        .cta {
+            position: relative;
+
+            overflow: hidden;
+
+            text-align: center;
+
+            padding: 65px 25px;
+
+            border: 1px solid #242426;
+
+            border-radius: 22px;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #19191b 0%,
+                    #0c0c0e 68%
+                );
+        }
+
+        .cta::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            top: -170px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            opacity: .025;
+
+            filter: blur(25px);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta h2 {
+            font-size: 29px;
+
+            letter-spacing: -.8px;
+
+            margin-bottom: 9px;
+        }
+
+        .cta p {
+            color: #5d5d60;
+
+            font-size: 10px;
+
+            margin-bottom: 23px;
+        }
+
+        footer {
+            padding: 55px 0 20px;
+
+            background: #070708;
+
+            border-top: 1px solid #19191b;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr;
+
+            gap: 35px;
+        }
+
+        .footer-brand .brand {
+            align-items: flex-start;
+        }
+
+        .footer-brand p {
+            max-width: 240px;
+
+            margin-top: 12px;
+
+            color: #4e4e51;
+
+            font-size: 9px;
+
+            line-height: 1.9;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 14px;
+
+            font-size: 10px;
+
+            color: #bdbdbf;
+        }
+
+        .footer-column a {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #505053;
+
+            font-size: 9px;
+
+            transition: .25s;
+        }
+
+        .footer-column a:hover {
+            color: #eeeeee;
+        }
+
+        .footer-bottom {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-top: 42px;
+
+            padding-top: 17px;
+
+            border-top: 1px solid #171719;
+
+            color: #414144;
+
+            font-size: 8px;
+        }
+
+        @media (max-width: 800px) {
+
+            header {
+                width: 95%;
+            }
+
+            .dynamic-island {
+                min-height: 52px;
+            }
+
+            .brand {
+                min-width: 72px;
+            }
+
+            .island-dot {
+                margin: 0 5px;
+            }
+
+            .nav-links a {
+                padding: 7px 7px;
+
+                font-size: 8px;
+            }
+
+            .header-btn {
+                padding: 7px 10px;
+
+                font-size: 7px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+
+                gap: 35px;
+            }
+
+            .about-visual {
+                height: 260px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+        }
+
+
+        @media (max-width: 560px) {
+
+            header {
+                top: 12px;
+
+                width: 96%;
+            }
+
+            .dynamic-island {
+                min-height: 49px;
+
+                padding: 6px;
+            }
+
+            .brand {
+                min-width: 55px;
+            }
+
+            .brand-title {
+                font-size: 7px;
+            }
+
+            .brand-name {
+                font-size: 6px;
+            }
+
+            .island-dot {
+                display: none;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .nav-links a {
+                padding: 6px 5px;
+
+                font-size: 7px;
+            }
+
+            .header-btn {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 105px;
+            }
+
+            .hero h1 {
+                font-size: 39px;
+
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 11px;
+            }
+
+            .about-content h2 {
+                font-size: 28px;
+            }
+
+            .cta h2 {
+                font-size: 25px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 7px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="dynamic-island">
+
+            <div class="brand">
+
+                <span class="brand-title">
+                    MENU
+                </span>
+
+                <span class="brand-name">
+                    D4w1nchi
+                </span>
+
+            </div>
+
+
+            <div class="island-dot"></div>
+
+
+            <nav class="nav-links">
+
+                <a href="#home" class="active">
+                    خانه
+                </a>
+
+                <a href="#features">
+                    ویژگی‌ها
+                </a>
+
+                <a href="#about">
+                    درباره ما
+                </a>
+
+                <a href="#contact">
+                    ارتباط
+                </a>
+
+            </nav>
+
+
+            <a href="#contact" class="header-btn">
+                شروع کنید
+            </a>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <div class="badge">
+
+                    <span class="badge-dot"></span>
+
+                    DIGITAL EXPERIENCE
+
+                </div>
+
+
+                <h1>
+
+                    ساده،
+                    <span class="muted">
+                        مدرن
+                    </span>
+                    و قدرتمند.
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    یک تجربه دیجیتال مینیمال برای برندهایی
+                    که به جزئیات اهمیت می‌دهند و می‌خواهند
+                    متفاوت دیده شوند.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a href="#features"
+                       class="btn btn-primary">
+
+                        کشف امکانات
+
+                    </a>
+
+
+                    <a href="#about"
+                       class="btn btn-secondary">
+
+                        بیشتر بدانید
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="features">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <span class="section-label">
+                        WHY US
+                    </span>
+
+                    <h2>
+                        چرا ما؟
+                    </h2>
+
+                    <p>
+                        ترکیبی از طراحی مینیمال،
+                        عملکرد بالا و تجربه کاربری.
+                    </p>
+
+                </div>
+
+
+                <div class="features">
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ✦
+                        </div>
+
+                        <h3>
+                            طراحی مدرن
+                        </h3>
+
+                        <p>
+                            طراحی مینیمال و حرفه‌ای
+                            با تمرکز روی جزئیات بصری
+                            و تجربه کاربری.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ⚡
+                        </div>
+
+                        <h3>
+                            سریع و سبک
+                        </h3>
+
+                        <p>
+                            ساختاری سبک و بهینه برای
+                            بارگذاری سریع و تجربه‌ای روان.
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ◈
+                        </div>
+
+                        <h3>
+                            ریسپانسیو
+                        </h3>
+
+                        <p>
+                            طراحی کاملاً سازگار با
+                            موبایل، تبلت و دسکتاپ.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="about">
+
+            <div class="container">
+
+                <div class="about">
+
+
+                    <div class="about-visual"></div>
+
+
+                    <div class="about-content">
+
+                        <span class="section-label">
+                            ABOUT THE EXPERIENCE
+                        </span>
+
+
+                        <h2>
+
+                            زیبایی در
+                            <span>
+                                سادگی
+                            </span>
+                            است.
+
+                        </h2>
+
+
+                        <p>
+
+                            یک طراحی خوب نباید شلوغ باشد.
+                            هر المان باید هدفی داشته باشد
+                            و هر جزئیات باید تجربه کاربر
+                            را بهتر کند.
+
+                        </p>
+
+
+                        <a href="#contact"
+                           class="btn btn-secondary">
+
+                            بیشتر بدانید
+
+                        </a>
+
+
+                        <div class="stats">
+
+                            <div class="stat">
+
+                                <strong>
+                                    01
+                                </strong>
+
+                                <span>
+                                    DESIGN
+                                </span>
+
+                            </div>
+
+
+                            <div class="stat">
+
+                                <strong>
+                                    24/7
+                                </strong>
+
+                                <span>
+                                    SUPPORT
+                                </span>
+
+                            </div>
+
+
+                            <div class="stat">
+
+                                <strong>
+                                    100%
+                                </strong>
+
+                                <span>
+                                    RESPONSIVE
+                                </span>
+
+                            </div>
+
+
+                            <div class="stat">
+
+                                <strong>
+                                    ∞
+                                </strong>
+
+                                <span>
+                                    POSSIBILITIES
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="contact">
+
+            <div class="container">
+
+                <div class="cta">
+
+                    <div class="cta-content">
+
+                        <h2>
+                            آماده شروع هستید؟
+                        </h2>
+
+                        <p>
+                            قدم اول را بردارید و یک
+                            تجربه متفاوت بسازید.
+                        </p>
+
+                        <a href="#"
+                           class="btn btn-primary">
+
+                            شروع پروژه
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+
+                <div class="footer-brand">
+
+                    <div class="brand">
+
+                        <span class="brand-title">
+                            MENU
+                        </span>
+
+                        <span class="brand-name">
+                            D4w1nchi
+                        </span>
+
+                    </div>
+
+
+                    <p>
+
+                        طراحی تجربه‌های دیجیتال مدرن،
+                        ساده و ماندگار.
+
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        صفحات
+                    </h4>
+
+                    <a href="#home">
+                        خانه
+                    </a>
+
+                    <a href="#features">
+                        ویژگی‌ها
+                    </a>
+
+                    <a href="#about">
+                        درباره ما
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        شبکه‌ها
+                    </h4>
+
+                    <a href="#">
+                        Instagram
+                    </a>
+
+                    <a href="#">
+                        Telegram
+                    </a>
+
+                    <a href="#">
+                        GitHub
+                    </a>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        ارتباط
+                    </h4>
+
+                    <a href="#contact">
+                        تماس
+                    </a>
+
+                    <a href="#">
+                        پشتیبانی
+                    </a>
+
+                    <a href="#">
+                        FAQ
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 D4w1nchi
+                </span>
+
+                <span>
+                    Designed with ♥
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
